@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'NotaController@index')->name('inicio');
+
+Route::post('/store', 'NotaController@store')->name('store');
