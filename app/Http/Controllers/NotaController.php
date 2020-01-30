@@ -15,7 +15,8 @@ class NotaController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $notas = App\Nota::all();
+        return view('welcome', compact("notas"));
     }
 
     /**
@@ -60,9 +61,9 @@ class NotaController extends Controller
      * @param  \App\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nota $nota)
+    public function edit(Nota $id)
     {
-        //
+        $notaActualizar = App\Nota::findOrFail($id);
     }
 
     /**
