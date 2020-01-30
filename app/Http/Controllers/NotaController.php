@@ -15,7 +15,7 @@ class NotaController extends Controller
      */
     public function index()
     {
-        $notas = App\Nota::all();
+        $notas = App\Nota::paginate(2);
         return view('welcome', compact("notas"));
     }
 
@@ -89,8 +89,10 @@ class NotaController extends Controller
      * @param  \App\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nota $nota)
+    public function destroy($id)
     {
-        //
+        $eliminar = App\Nota::findOrFail($id);
+        $eliminar->delete();
+        return back()->with('update', 'La nota ha sido eliminada.');
     }
 }

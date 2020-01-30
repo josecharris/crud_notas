@@ -17,10 +17,15 @@
             <th>{{$item->descripcion}}</th>
             <th>
               <a href="{{ route('edit', $item->id) }}" class="btn btn-warning">Editar</a>
+              <form class="d-inline" action="{{route('eliminar', $item->id)}}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+              </form>
             </th>
           </tr>
         @endforeach
       </table>
+      {{$notas->links()}}
     </div>
     <div class="col-md-5">
       <h3 class="text-center mb-4">Agregar notas</h3>
