@@ -15,7 +15,8 @@ class NotaController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $notas = App\Nota::paginate(2);
+        return view('welcome', compact("notas"));
     }
 
     /**
@@ -60,9 +61,10 @@ class NotaController extends Controller
      * @param  \App\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nota $nota)
+    public function edit($id)
     {
-        //
+        $notaActualizar = App\Nota::findOrFail($id);
+        return view("editar", compact("notaActualizar"));
     }
 
     /**
@@ -72,9 +74,13 @@ class NotaController extends Controller
      * @param  \App\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nota $nota)
+    public function update(Request $request, $id)
     {
-        //
+        $newNote = App\Nota::findOrFail($id);
+        $newNote->nombre = $request->nombre;
+        $newNote->descripcion = $request->descripcion;
+        $newNote->save();
+        return back()->with('update', 'La nota ha sido actualizada.');
     }
 
     /**
@@ -83,8 +89,10 @@ class NotaController extends Controller
      * @param  \App\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nota $nota)
+    public function destroy($id)
     {
-        //
+        $eliminar = App\Nota::findOrFail($id);
+        $eliminar->delete();
+        return back()->with('update', 'La nota ha sido eliminada.');
     }
 }
