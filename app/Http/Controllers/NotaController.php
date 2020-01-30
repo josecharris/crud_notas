@@ -61,9 +61,10 @@ class NotaController extends Controller
      * @param  \App\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nota $id)
+    public function edit($id)
     {
         $notaActualizar = App\Nota::findOrFail($id);
+        return view("editar", compact("notaActualizar"));
     }
 
     /**
@@ -73,9 +74,13 @@ class NotaController extends Controller
      * @param  \App\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nota $nota)
+    public function update(Request $request, $id)
     {
-        //
+        $newNote = App\Nota::findOrFail($id);
+        $newNote->nombre = $request->nombre;
+        $newNote->descripcion = $request->descripcion;
+        $newNote->save();
+        return back()->with('update', 'La nota ha sido actualizada.');
     }
 
     /**

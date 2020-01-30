@@ -15,4 +15,6 @@ Route::get('/', 'NotaController@index')->name('inicio');
 
 Route::post('/store', 'NotaController@store')->name('store');
 
-Route::get('/editar/{id}', 'NotaController@edit')->name('editar');
+Route::get('/edit/{id}', 'NotaController@edit')->name('edit');
+
+Route::put('/update/{id}', 'NotaController@update')->name('update');

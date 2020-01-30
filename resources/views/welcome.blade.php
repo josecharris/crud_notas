@@ -16,7 +16,7 @@
             <th>{{$item->nombre}}</th>
             <th>{{$item->descripcion}}</th>
             <th>
-              <a href="{{route('editar', $item->id)}}" class="btn btn-warning">Editar</a>
+              <a href="{{ route('edit', $item->id) }}" class="btn btn-warning">Editar</a>
             </th>
           </tr>
         @endforeach
@@ -28,10 +28,10 @@
       <form action="{{route('store')}}" method="post">
         @csrf
         <div class="form-group">
-          <input type="text" name="nombre" value="nombre" class="form-control"
+          <input type="text" name="nombre" class="form-control"
           placeholder="Nombre de la nota:" required>
           <br>
-          <input type="text" name="descripcion" value="descripcion" class="form-control"
+          <input type="text" name="descripcion" class="form-control"
           placeholder="Escriba la descripción:" required>
           <br>
           <button type="submit" class="btn btn-success btn-block">Enviar</button>
